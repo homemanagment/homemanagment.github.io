@@ -20,7 +20,7 @@
     <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
 
 
-  <title> Домашняя панель управления </title>
+  <title>CodePen - Locking Smart Home Dashboard</title>
 
     <link rel="canonical" href="https://codepen.io/krautgti/pen/eYVjJeg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0">
@@ -822,10 +822,10 @@ var Default;
 })(Default || (Default = {}));
 var WeatherType;
 (function (WeatherType) {
-    WeatherType["Cloudy"] = "Ветренно";
-    WeatherType["Rainy"] = "Дождливо";
-    WeatherType["Stormy"] = "Шторм";
-    WeatherType["Sunny"] = "Солнечно";
+    WeatherType["Cloudy"] = "Cloudy";
+    WeatherType["Rainy"] = "Rainy";
+    WeatherType["Stormy"] = "Stormy";
+    WeatherType["Sunny"] = "Sunny";
 })(WeatherType || (WeatherType = {}));
 const defaultPosition = () => ({
     left: 0,
@@ -841,7 +841,7 @@ const T = {
         return `${hours}:${T.formatSegment(minutes)}`;
     },
     formatHours: (hours) => {
-        return hours % 24;
+        return hours % 12 === 0 ? 12 : hours % 12;
     },
     formatSegment: (segment) => {
         return segment < 10 ? `0${segment}` : segment;
@@ -900,7 +900,7 @@ const ScrollableComponent = (props) => {
     return (React.createElement("div", { ref: ref, className: classNames("scrollable-component", props.className), id: props.id, onMouseDown: handleOnMouseDown, onMouseMove: handleOnMouseMove, onMouseUp: handleOnMouseUp, onMouseLeave: handleOnMouseUp }, props.children));
 };
 const WeatherSnap = () => {
-    const [temperature] = React.useState(N.rand(10, 26));
+    const [temperature] = React.useState(N.rand(65, 85));
     return (React.createElement("span", { className: "weather" },
         React.createElement("i", { className: "weather-type", className: "fa-duotone fa-sun" }),
         React.createElement("span", { className: "weather-temperature-value" }, temperature),
@@ -908,7 +908,7 @@ const WeatherSnap = () => {
 };
 const Reminder = () => {
     return (React.createElement("div", { className: "reminder" },
-        React.createElement("span", { className: "reminder-text" }, "Добро пожаловать")));
+        React.createElement("span", { className: "reminder-text" }, "Welcome to your smart home")));
 };
 const Time = () => {
     const date = useCurrentDateEffect();
@@ -1037,38 +1037,38 @@ const Weather = () => {
     const getDays = () => {
         return [{
                 id: 1,
-                name: "Понедельник",
-                temperature: N.rand(20, 30),
+                name: "Mon",
+                temperature: N.rand(60, 80),
                 weather: WeatherType.Sunny
             }, {
                 id: 2,
-                name: "Вторник",
-                temperature: N.rand(20, 33),
+                name: "Tues",
+                temperature: N.rand(60, 80),
                 weather: WeatherType.Sunny
             }, {
                 id: 3,
-                name: "Среда",
-                temperature: N.rand(15, 35),
+                name: "Wed",
+                temperature: N.rand(60, 80),
                 weather: WeatherType.Cloudy
             }, {
                 id: 4,
-                name: "Четверг",
-                temperature: N.rand(20, 30),
+                name: "Thurs",
+                temperature: N.rand(60, 80),
                 weather: WeatherType.Rainy
             }, {
                 id: 5,
-                name: "Пятница",
-                temperature: N.rand(20, 30),
+                name: "Fri",
+                temperature: N.rand(60, 80),
                 weather: WeatherType.Stormy
             }, {
                 id: 6,
-                name: "Суббота",
-                temperature: N.rand(14, 24),
+                name: "Sat",
+                temperature: N.rand(60, 80),
                 weather: WeatherType.Sunny
             }, {
                 id: 7,
-                name: "Воскресенье",
-                temperature: N.rand(20, 30),
+                name: "Sun",
+                temperature: N.rand(60, 80),
                 weather: WeatherType.Cloudy
             }].map((day) => {
             const getIcon = () => {
@@ -1101,7 +1101,7 @@ const Tools = () => {
                 id: 1,
                 image: "https://scottbrothersnc.com/wp-content/uploads/AC_A_002-ductless-AC-1.jpg",
                 label: "Connected",
-                name: "Кондиционер"
+                name: "Air Conditioner"
             }, {
                 icon: "fa-solid fa-vent-damper",
                 id: 2,
@@ -1131,7 +1131,7 @@ const Tools = () => {
                 id: 6,
                 image: "https://www.audiocontrol.com/wp-content/uploads/2020/05/new-home-theater-web-slide-v1.jpg",
                 label: "Audio",
-                name: "Динамики"
+                name: "Home Speakers"
             }].map((tool) => {
             const styles = {
                 backgroundImage: `url(${tool.image})`
@@ -1153,7 +1153,7 @@ const Restaurants = () => {
                 desc: "Lights",
                 id: 1,
                 image: "https://hommes.studio/wp-content/uploads/what-is-brutalist-design-brutalist-furniture-1.jpg",
-                title: "Комната"
+                title: "Living Room"
             }, {
                 desc: "Lights",
                 id: 2,
@@ -1163,12 +1163,12 @@ const Restaurants = () => {
                 desc: "Lights",
                 id: 3,
                 image: "https://cdn.habitusliving.com/wp-content/uploads/CanadianBayMakerMayccDanielFuge_kitchen-island.jpg",
-                title: "Кухня"
+                title: "Kitchen"
             }, {
                 desc: "Lights",
                 id: 4,
                 image: "http://cdn.home-designing.com/wp-content/uploads/2021/03/black-home-office.jpg",
-                title: "Кабинет"
+                title: "Office"
             }].map((restaurant) => {
             const styles = {
                 backgroundImage: `url(${restaurant.image})`
@@ -1189,21 +1189,21 @@ const Movies = () => {
                 id: 1,
                 icon: "fa-solid fa-battery-full",
                 image: "https://www.tesla.com/sites/default/files/powerwall/hero/D_PW_Hero_2880x1800.jpg",
-                title: "Powerwall"
+                title: "Tesla Powerwall"
             }, {
                 desc: "Energy Production",
                 id: 2,
                 icon: "fa-solid fa-solar-panel",
                 image: "https://media.wired.com/photos/5db373b7dea30b00096c6bbe/16:9/w_2400,h_1350,c_limit/Transpo-Tesla_solar_roof.jpg",
-                title: "Солнечные батареи"
+                title: "Solar Power"
             }, {
-                desc: "Зарядка",
+                desc: "Your EV Charging Stats",
                 id: 3,
                 icon: "fa-solid fa-charging-station",
                 image: "https://www.solarreviews.com/content/images/blog/post/focus_images/77_77-are-tesla-solar-panels-the-best-option.jpg",
                 title: "Your Charging Station"
             }, {
-                desc: "Безопасность,
+                desc: "Your Home Security Overview",
                 id: 4,
                 icon: "fa-solid fa-camera-security",
                 image: "https://www.safewise.com/app/uploads/facebook-security-control-panel-comparison.jpg",
